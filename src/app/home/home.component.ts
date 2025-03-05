@@ -8,16 +8,43 @@ import { Component, Inject, OnInit } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+
   public getJsonValue: any;
   public postJsonValue: any;
   constructor(private http: HttpClient) {}
   ngOnInit(): void {
-      this.getMethod();
+      //this.getMethod();
       this.postMethod();
 
   }
-  public getMethod() {
-    this.http.get('https://jsonplaceholder.typicode.com/posts/1')
+
+  isLoggedIn(name: string, username: string) {
+    this.http.get<any[]>(`https://jsonplaceholder.typicode.com/users?name=${encodeURIComponent(name)}`)
+      .subscribe((data) => {
+        if (data.length > 0) {
+          const user = data[0]; // Accedemos al primer usuario encontrado
+          console.log(user.name);      // "Leanne Graham"
+          console.log(user.username);  // "Bret"
+          this.getJsonValue = user;
+
+          if (name === user.name && username === user.username) {
+            alert('Login Successful');
+          } else {
+            alert('Login Failed');
+          }
+        } else {
+          alert('Login Failed');
+        }
+      }, (error) => {
+        console.error('Error fetching user data', error);
+        alert('Login Failed');
+      });
+  }
+  
+
+  
+  public getMethod(name:string) {
+    this.http.get('https://jsonplaceholder.typicode.com/users?name='+name)
       .subscribe((data) => {
         console.log(data);
         this.getJsonValue = data;
