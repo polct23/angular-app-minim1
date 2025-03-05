@@ -1,3 +1,9 @@
 
   <h1>Welcome to {{ title }}!</h1>
-  <app-user></app-user>
+  @if(loggedIn){
+    <p>Bienvenido</p>
+    <app-user></app-user>
+  }
+  @else {
+    <app-home (exportLoggedIn)="getLoggedIn($event)"></app-home>
+  }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,13 @@ import { Component, Inject, OnInit } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-
+  @Output() exportLoggedIn = new EventEmitter<boolean>();
   public getJsonValue: any;
   public postJsonValue: any;
+  loggedIn: boolean = false;
   constructor(private http: HttpClient) {}
   ngOnInit(): void {
-      //this.getMethod();
-      this.postMethod();
+
 
   }
 
@@ -28,7 +28,10 @@ export class HomeComponent implements OnInit {
           this.getJsonValue = user;
 
           if (name === user.name && username === user.username) {
+            this.loggedIn = true;
             alert('Login Successful');
+            this.exportLoggedIn.emit(this.loggedIn);
+
           } else {
             alert('Login Failed');
           }
@@ -40,9 +43,9 @@ export class HomeComponent implements OnInit {
         alert('Login Failed');
       });
   }
-  
 
-  
+
+
   public getMethod(name:string) {
     this.http.get('https://jsonplaceholder.typicode.com/users?name='+name)
       .subscribe((data) => {

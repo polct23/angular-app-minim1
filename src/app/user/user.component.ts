@@ -4,9 +4,10 @@ import { HomeComponent } from "../home/home.component";
 
 @Component({
   selector: 'app-user',
-  imports: [GamesComponent, HomeComponent],
+  imports: [GamesComponent],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
+  standalone: true
 })
 export class UserComponent {
   username = 'Max';

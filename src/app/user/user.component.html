@@ -1,21 +1,19 @@
 
-
 <section>
-    
+
     @if(isLoggedIn)
     {
         <p>Bienvenido, {{username}}</p>
-        <img 
+        <img
         (click)="greet()"
         alt="photo" src="https://github.com/VicencJosep.png" />
     }
-    @else 
+    @else
     {
         <p>Inica sesión mongo</p>
         <button (click)="isLoggedIn= true" >Log In</button>
     }
 <app-games></app-games>
-<app-home></app-home>
 
 </section>
 
