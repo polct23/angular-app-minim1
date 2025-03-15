@@ -1,0 +1,28 @@
+<div class = "container">
+  <aside class="sidebar">
+    <nav>
+      <li>
+        <a class="button"
+          routerLink="/packet-component"
+          routerLinkActive="activebutton"
+          ariaCurrentWhenActive="page">
+          Packets
+        </a>
+      </li>
+      <li>
+        <a class="button"
+          routerLink="/user-component"
+          routerLinkActive="activebutton"
+          ariaCurrentWhenActive="page">
+          Users
+        </a>
+      </li>
+
+    </nav>
+  </aside>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+
+</div>

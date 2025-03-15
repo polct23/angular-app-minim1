@@ -1,9 +1,4 @@
+<h1 class = "title">TRACK-IT BACK OFFICE</h1>
+<app-left-box></app-left-box>
+<!-- The routed views render in the <router-outlet>-->
 
-  <h1>Welcome to {{ title }}!</h1>
-  @if(loggedIn){
-    <p>Bienvenido</p>
-    <app-user></app-user>
-  }
-  @else {
-    <app-home (exportLoggedIn)="getLoggedIn($event)"></app-home>
-  }

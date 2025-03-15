@@ -1,0 +1,10 @@
+<div *ngIf="packetsList.length > 0">
+  <div *ngFor="let packet of packetsList; let i = index; trackBy: trackByPacketId">
+    <p>Nombre: {{ packet.name }}</p>
+    <p>Descripción: {{ packet.description }}</p>
+    <p>Estatus: {{ packet.status }}</p>
+  </div>
+</div>
+<ng-template #noPackets>
+  <div>No hay paquetes disponibles</div>
+</ng-template>

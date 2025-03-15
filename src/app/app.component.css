@@ -1,0 +1,12 @@
+.title {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5em;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  background-clip: text;
+  color: transparent;
+}
