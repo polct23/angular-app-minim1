@@ -1,7 +1,13 @@
 <div class="search-container">
   <h1 class="title">TRACK-IT BACK OFFICE</h1>
   <div class="search-box">
-    <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." />
-    <button (click)="search()">Buscar</button>
+    <div *ngIf="message === 'user'">
+      <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." />
+      <button (click)="search()">Buscar</button>
+    </div>
+    <div *ngIf="message === 'packet'">
+      <input [(ngModel)]="searchTerm" placeholder="Buscar paquetes..." />
+      <button (click)="search()">Buscar</button>
+    </div>
   </div>
 </div>
