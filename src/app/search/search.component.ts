@@ -14,8 +14,8 @@ import { PacketService } from '../services/packet.service';
 })
 export class SearchComponent implements OnInit {
   searchTerm: string = '';
-  filteredUsers: any[] = [];
-  message: string = '';
+  filteredList: any[] = [];
+  message: string = 'user';
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private communicationService: CommunicationService,
@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.communicationService.currentMessage.subscribe(message => {
-      console.log('CommunicationService.sendMessage', this.message);
       this.message = message;
       this.filter();
     });
@@ -33,6 +32,7 @@ export class SearchComponent implements OnInit {
     });
   }
   filter(): void {
+    console.log('CommunicationService.sendMessage', this.message);
 
     if(this.message === 'packet'){
       this.filterPackets();
@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
   }
   filterPackets(): void {
     this.packetService.getPackets().subscribe(packets => {
-      this.filteredUsers = packets.filter(packet =>
+      this.filteredList = packets.filter(packet =>
         packet.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     });
@@ -52,21 +52,21 @@ export class SearchComponent implements OnInit {
     if (this.searchTerm.includes('@')) {
       // If searchTerm contains '@', filter by email
       this.userService.getUsers().subscribe(users => {
-        this.filteredUsers = users.filter(user =>
+        this.filteredList = users.filter(user =>
           user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });
     } else if (!isNaN(Number(this.searchTerm))) {
       // If searchTerm is a number, filter by phone
       this.userService.getUsers().subscribe(users => {
-        this.filteredUsers = users.filter(user =>
+        this.filteredList = users.filter(user =>
           user.phone.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });
     }else {
       // Otherwise, filter by name
       this.userService.getUsers().subscribe(users => {
-        this.filteredUsers = users.filter(user =>
+        this.filteredList = users.filter(user =>
           user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });

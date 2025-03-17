@@ -1,13 +1,26 @@
 <h2>Resultados de búsqueda para "{{ searchTerm }}"</h2>
-<ul>
-  <div>
-    <div *ngFor="let user of filteredUsers">
-      <p>Username del usuario: {{ user.name }}</p>
-      <p>Teléfono del usuario: {{ user.phone }}</p>
-      <p>Email del usuario: {{ user.email }}</p>
+<div *ngIf="message==='user'">
+  <ul>
+    <div>
+      <div *ngFor="let user of filteredList">
+        <p>Username del usuario: {{ user.name }}</p>
+        <p>Teléfono del usuario: {{ user.phone }}</p>
+        <p>Email del usuario: {{ user.email }}</p>
+      </div>
     </div>
-  </div>
-</ul>
+  </ul>
+</div>
+<div *ngIf="message==='packet'">
+  <ul>
+    <div>
+      <div *ngFor="let packet of filteredList">
+        <p>Nombre: {{ packet.name }}</p>
+        <p>Descripción: {{ packet.description }}</p>
+        <p>Estatus: {{ packet.status }}</p>
+      </div>
+    </div>
+  </ul>
+</div>
 
-<p *ngIf="filteredUsers.length === 0">No se encontraron resultados.</p>
+<p *ngIf="filteredList.length === 0">No se encontraron resultados.</p>
 
