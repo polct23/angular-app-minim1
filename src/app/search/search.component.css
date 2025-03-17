@@ -1,0 +1,63 @@
+/* Estilo global para la lista de usuarios */
+div {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Estilo del contenedor principal de los usuarios */
+div > div {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los párrafos de la lista */
+div > div p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Títulos para cada campo del usuario */
+div > div p:first-child {
+  font-weight: bold;
+  color: #2d3e50;
+}
+
+/* Para el contenedor cuando no hay usuarios */
+#noUsers {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Resaltar la información de cada usuario */
+div > div p:nth-child(odd) {
+  color: #555;
+}
+
+/* Estilo para el contenedor si hay usuarios */
+div > div:empty {
+  display: none;
+}
+
+/* Adaptación para pantallas más pequeñas */
+@media (max-width: 600px) {
+  div > div {
+    padding: 12px;
+  }
+
+  div > div p {
+    font-size: 13px;
+  }
+
+  #noUsers {
+    font-size: 16px;
+  }
+}

@@ -1,7 +1,7 @@
 <div *ngIf="usersList.length > 0">
   <div *ngFor="let user of usersList; let i = index; trackBy: trackByUserId">
     <p>Username del usuario: {{ user.name }}</p>
-    <p>Edad del usuario: {{ user.phone }}</p>
+    <p>Teléfono del usuario: {{ user.phone }}</p>
     <p>Email del usuario: {{ user.email }}</p>
   </div>
 </div>

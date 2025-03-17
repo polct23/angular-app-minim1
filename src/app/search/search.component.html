@@ -1,8 +1,13 @@
 <h2>Resultados de búsqueda para "{{ searchTerm }}"</h2>
 <ul>
-  <li *ngFor="let user of filteredUsers">
-    {{ user.name }} - {{ user.email }}
-  </li>
+  <div>
+    <div *ngFor="let user of filteredUsers">
+      <p>Username del usuario: {{ user.name }}</p>
+      <p>Teléfono del usuario: {{ user.phone }}</p>
+      <p>Email del usuario: {{ user.email }}</p>
+    </div>
+  </div>
 </ul>
+
 <p *ngIf="filteredUsers.length === 0">No se encontraron resultados.</p>
 

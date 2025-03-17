@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CommunicationService } from '../services/communication.service';
 @Component({
   selector: 'app-left-box',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
@@ -7,5 +8,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './left-box.component.css'
 })
 export class LeftBoxComponent {
+  constructor(private communicationService: CommunicationService) {}
 
+  sendPacketMessage() {
+    this.communicationService.sendMessage('packet');
+  }
+
+  sendUserMessage() {
+    this.communicationService.sendMessage('user');
+  }
 }

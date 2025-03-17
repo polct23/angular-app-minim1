@@ -5,7 +5,8 @@
         <a class="button"
           routerLink="/packet-component"
           routerLinkActive="activebutton"
-          ariaCurrentWhenActive="page">
+          ariaCurrentWhenActive="page"
+          (click)="sendPacketMessage()">
           Packets
         </a>
       </li>
@@ -13,7 +14,8 @@
         <a class="button"
           routerLink="/user-component"
           routerLinkActive="activebutton"
-          ariaCurrentWhenActive="page">
+          ariaCurrentWhenActive="page"
+          (click)="sendUserMessage()">
           Users
         </a>
       </li>
