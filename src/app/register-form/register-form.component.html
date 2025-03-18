@@ -7,8 +7,8 @@
 
   <!-- Formulario de Registro de Usuario -->
   <form *ngIf="activeTab === 'user'" [formGroup]="registerForm" (ngSubmit)="registerUser()">
-    <label for="username">Nombre de Usuario:</label>
-    <input type="text" id="username" formControlName="username" required><br><br>
+    <label for="name">Nombre de Usuario:</label>
+    <input type="text" id="name" formControlName="name" required><br><br>
 
     <label for="email">Email:</label>
     <input type="email" id="email" formControlName="email" required><br><br>
@@ -20,7 +20,7 @@
     <input type="text" id="phone" formControlName="phone" required><br><br>
 
     <label for="packets">Packets (JSON):</label>
-    <textarea id="packets" formControlName="packets" required></textarea><br><br>
+    <textarea type="text" id="packets" formControlName="packets" required></textarea><br><br>
 
     <button type="submit" class="button add-button">Registrar Usuario</button>
   </form>

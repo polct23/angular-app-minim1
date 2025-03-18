@@ -19,7 +19,7 @@ export class RegisterFormComponent {
   constructor(private fb: FormBuilder, private userService: UserService, private packetService: PacketService) {
     // Formulario de Usuario
     this.registerForm = this.fb.group({
-      username: [''],
+      name: [''],
       email: [''],
       password: [''],
       phone: [''],
@@ -41,9 +41,11 @@ export class RegisterFormComponent {
 
   // Enviar formulario de usuario
   registerUser() {
-    if (this.registerForm.valid) {
-      const userData = this.registerForm.value;
-      this.userService.createUser(userData).subscribe({
+    if ((this.registerForm.valid)||((this.registerForm.value.name.length>0)&&(this.registerForm.value.packets.length==0)&&(this.registerForm.value.phone.length>0)&&(this.registerForm.value.email.length>0)&&(this.registerForm.value.password.length>0))) {
+      const userData = this.registerForm.value;userData.available = true;
+      userData.packets = userData.packets || []; // Asegura que sea un array
+      console.log("userData a enviar:", JSON.stringify(userData, null, 2));
+      this.userService.createUser2(userData).subscribe({
         next: (response) => {
           console.log('Usuario exitoso:', response);
           
@@ -60,6 +62,8 @@ export class RegisterFormComponent {
   registerPacket() {
     if (this.packetForm.valid) {
       const packetData = this.packetForm.value;
+      console.log("packetData:",packetData
+      );
         this.packetService.createPacket(packetData).subscribe({
           next: (response) => {
             console.log('Paquete exitoso:', response);

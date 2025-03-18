@@ -23,24 +23,15 @@ export class UserService {
   }
 
 
-  createUser(userData: any): Observable<any> {
-    // Si packets viene en formato de texto, intenta convertirlo a un array válido
-    if (typeof userData.packets === 'string') {
-      try {
-        userData.packets = JSON.parse(userData.packets);
-      } catch (e) {
-        console.error("Error al parsear packets", e);
-        userData.packets = [];
-      }
-    }
-  
-    return this.http.post(this.apiUrl, userData);
+   createUser(userData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, userData);
   }
-  
 
 
   createUser2(credentials: { name: string; email: string; password: string; phone: string; available: boolean; packets: string[] }): Observable<any> 
   {
+    credentials.available = true;
+    console.log("credentials:",credentials);
     return this.http.post(this.apiUrl, credentials);
   }
   createUser3(credentials: { name: string; email: string; password: string; phone: string; packets: string[] }): Observable<any>
