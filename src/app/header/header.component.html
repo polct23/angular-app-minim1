@@ -1,13 +1,18 @@
-<div class="search-container">
-  <h1 class="title">TRACK-IT BACK OFFICE</h1>
-  <div class="search-box">
-    <div *ngIf="message === 'user'">
-      <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." />
-      <button (click)="search()">Buscar</button>
-    </div>
-    <div *ngIf="message === 'packet'">
-      <input [(ngModel)]="searchTerm" placeholder="Buscar paquetes..." />
-      <button (click)="search()">Buscar</button>
+<div class="header-container">
+  <img src="image.png" alt="Track It Logo" class="header-logo">
+  <div class="search-container">
+    <h1 class="title">TRACK-IT BACK OFFICE</h1>
+    <div class="search-box">
+      <div *ngIf="message === 'user'">
+        <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." />
+        <button (click)="search()">Buscar</button>
+      </div>
+      <div *ngIf="message === 'packet'">
+        <input [(ngModel)]="searchTerm" placeholder="Buscar paquetes..." />
+        <button (click)="search()">Buscar</button>
+      </div>
     </div>
   </div>
 </div>
+
+<app-register-button></app-register-button>

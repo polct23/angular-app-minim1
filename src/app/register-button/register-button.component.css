@@ -14,6 +14,7 @@
     text-shadow: 0 1px 0 #ffffff;
     outline: none;
     transition: all 0.3s ease;
+    margin-left: 250px;
   }
   
   /* Estilo adicional para que resalte como botón de acción */

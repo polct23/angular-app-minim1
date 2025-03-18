@@ -2,14 +2,15 @@
 .register-container {
   width: 350px;
   padding: 20px;
-  margin: 20px;
   position: absolute;
   right: 10%;
   top: 50%;
   transform: translateY(-50%);
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
+  margin-top: 85px;
+  margin-right: 400px;
 }
 
 /* Título */
@@ -17,23 +18,25 @@
   text-align: center;
   font-family: 'Arial', sans-serif;
   color: #333;
+  margin-bottom: 15px;
 }
 
 /* Pestañas de navegación */
 .tabs {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 15px;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .tabs button {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border: none;
   background-color: #ddd;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  border-radius: 6px;
 }
 
 .tabs button.active {
@@ -48,18 +51,21 @@
 }
 
 .register-container label {
-  margin-bottom: 5px;
   font-weight: bold;
   color: #333;
+  margin-bottom: 5px;
 }
 
+/* Inputs y Textarea */
 .register-container input, 
 .register-container textarea {
   margin-bottom: 15px;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Botón de enviar */
@@ -67,11 +73,12 @@
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 6px;
+  padding: 12px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .add-button:hover {
@@ -85,7 +92,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .register-container {
-      width: 90%;
-      right: 5%;
+    width: 90%;
+    right: 5%;
   }
 }

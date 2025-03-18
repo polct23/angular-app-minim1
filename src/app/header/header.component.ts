@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CommunicationService } from '../services/communication.service';
+import { RegisterButtonComponent } from '../register-button/register-button.component';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RegisterButtonComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
