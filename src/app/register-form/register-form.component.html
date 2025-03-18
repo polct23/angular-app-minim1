@@ -1,0 +1,41 @@
+<div class="register-container">
+  <!-- Pestañas de navegación -->
+  <div class="tabs">
+    <button (click)="setActiveTab('user')" [class.active]="activeTab === 'user'">Registrar Usuario</button>
+    <button (click)="setActiveTab('packet')" [class.active]="activeTab === 'packet'">Registrar Paquete</button>
+  </div>
+
+  <!-- Formulario de Registro de Usuario -->
+  <form *ngIf="activeTab === 'user'" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+    <label for="name">Nombre de Usuario:</label>
+    <input type="text" id="name" formControlName="name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" required><br><br>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" formControlName="password" required><br><br>
+
+    <label for="phone">Teléfono:</label>
+    <input type="text" id="phone" formControlName="phone" required><br><br>
+
+    <label for="packets">Packets (JSON):</label>
+    <textarea type="text" id="packets" formControlName="packets" required></textarea><br><br>
+
+    <button type="submit" class="button add-button">Registrar Usuario</button>
+  </form>
+
+  <!-- Formulario de Registro de Paquete -->
+  <form *ngIf="activeTab === 'packet'" [formGroup]="packetForm" (ngSubmit)="registerPacket()">
+    <label for="packet-name">Nombre del Paquete:</label>
+    <input type="text" id="packet-name" formControlName="name" required><br><br>
+
+    <label for="packet-description">Descripción:</label>
+    <input type="text" id="packet-description" formControlName="description" required><br><br>
+
+    <label for="packet-status">Estatus:</label>
+    <input type="text" id="packet-status" formControlName="status" required><br><br>
+
+    <button type="submit" class="button add-button">Registrar Paquete</button>
+  </form>
+</div>

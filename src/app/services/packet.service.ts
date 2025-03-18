@@ -16,5 +16,11 @@ export class PacketService {
       map(response => response.data) // Extrae el array 'data'
     );
   }
+   // Crear paquete
+   //createPacket(packetData: any): Observable<any> {
+    //return this.http.post<any>(`${this.apiUrl}/packets`, packetData);
+    createPacket(credentials: { name: string; description: string; status: string }): Observable<any> {
+      return this.http.post(this.apiUrl, credentials);
+  }
 
 }

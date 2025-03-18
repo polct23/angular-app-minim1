@@ -21,4 +21,22 @@ export class UserService {
   getUser(id: number): Observable<User>{
     return this.http.get<User>(this.apiUrl+"/"+id);
   }
+
+
+   createUser(userData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, userData);
+  }
+
+
+  createUser2(credentials: { name: string; email: string; password: string; phone: string; available: boolean; packets: string[] }): Observable<any> 
+  {
+    credentials.available = true;
+    console.log("credentials:",credentials);
+    return this.http.post(this.apiUrl, credentials);
+  }
+  createUser3(credentials: { name: string; email: string; password: string; phone: string; packets: string[] }): Observable<any>
+  {
+    return this.http.post(this.apiUrl, credentials);}
+  
+
 }
