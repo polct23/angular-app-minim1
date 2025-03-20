@@ -61,11 +61,12 @@ export class UserComponent implements OnInit {
 
     const confirmacion = confirm(`¿Estás seguro de que deseas eliminar ${usuariosSeleccionados.length} usuario(s)?`);
     if (confirmacion) {
-      this.eliminarUsuarios(usuariosSeleccionados);
+      this.eliminarUsuarios(usuariosSeleccionados,1);
     }
   }
-  eliminarUsuarios(usuariosSeleccionados: any[]): void {
+  eliminarUsuarios(usuariosSeleccionados: any[], opcion: number): void {
     usuariosSeleccionados.forEach(usuario => {
+      if(opcion==1){
       this.userService.deleteUsuario(usuario._id).subscribe({
         next: () => {
           console.log(`Usuario con ID ${usuario._id} eliminado.`);
@@ -75,7 +76,35 @@ export class UserComponent implements OnInit {
           console.error(`Error al eliminar el usuario con ID ${usuario._id}:`, error);
         }
       });
-    });
+    }
+    else if(opcion==2){
+      this.userService.deactivateUsuario(usuario._id, usuario).subscribe({
+        next: () => {
+          console.log(`Usuario con ID ${usuario._id} eliminado.`);
+         
+        },
+        error: (error) => {
+          console.error(`Error al eliminar el usuario con ID ${usuario._id}:`, error);
+        }
+      });
 
+    }
+
+    });
+    
+
+}
+desactivarUsuarios(): void {
+  const usuariosSeleccionados = this.usersList.filter(usuario => usuario.seleccionado); // Filtra los usuarios seleccionados
+  console.log('Usuarios seleccionados:', usuariosSeleccionados);
+  if (usuariosSeleccionados.length === 0) {
+    alert('No hay usuarios seleccionados para eliminar.');
+    return;
+  }
+
+  const confirmacion = confirm(`¿Estás seguro de que deseas eliminar ${usuariosSeleccionados.length} usuario(s)?`);
+  if (confirmacion) {
+    this.eliminarUsuarios(usuariosSeleccionados,2);
+  }
 }
 }
