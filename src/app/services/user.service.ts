@@ -36,7 +36,12 @@ export class UserService {
   }
   createUser3(credentials: { name: string; email: string; password: string; phone: string; packets: string[] }): Observable<any>
   {
-    return this.http.post(this.apiUrl, credentials);}
+    return this.http.post(this.apiUrl, credentials);
+  }
+  
+  deleteUsuario(id: number): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/${id}`); // Llamada DELETE para eliminar un usuario
+    }
   
 
 }

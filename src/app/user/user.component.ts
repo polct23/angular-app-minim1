@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, OnInit, Output,  ChangeDetectorRef } f
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
   standalone: true
@@ -13,7 +14,9 @@ import { CommonModule } from '@angular/common';
 export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerUsuarios();
+
   }
+  usuarioSeleccionado: User = new User();
   usersList: User[];
   constructor( private cdr: ChangeDetectorRef) {
     this.usersList = [];
@@ -26,7 +29,10 @@ export class UserComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users: User[]) => {
         //se añaden los usuarios recibidos por la peticion getUsers() a la lista de usuarios
-        this.usersList = users;
+        this.usersList = users.map(user => ({
+          ...user,
+          seleccionado: false // Inicializa la propiedad seleccionado
+        }));
         console.log(this.usersList, this.usersList.length);
         this.cdr.detectChanges();
         if (this.usersList.length > 0) {
@@ -42,5 +48,34 @@ export class UserComponent implements OnInit {
   trackByUserId(index: number, user: any): number {
     return user.id;
   }
+  toggleSeleccion(usuario: User): void {
+    usuario.seleccionado = !usuario.seleccionado;
+  }
+  confirmarEliminacion(): void {
+    const usuariosSeleccionados = this.usersList.filter(usuario => usuario.seleccionado); // Filtra los usuarios seleccionados
+    console.log('Usuarios seleccionados:', usuariosSeleccionados);
+    if (usuariosSeleccionados.length === 0) {
+      alert('No hay usuarios seleccionados para eliminar.');
+      return;
+    }
 
+    const confirmacion = confirm(`¿Estás seguro de que deseas eliminar ${usuariosSeleccionados.length} usuario(s)?`);
+    if (confirmacion) {
+      this.eliminarUsuarios(usuariosSeleccionados);
+    }
+  }
+  eliminarUsuarios(usuariosSeleccionados: any[]): void {
+    usuariosSeleccionados.forEach(usuario => {
+      this.userService.deleteUsuario(usuario._id).subscribe({
+        next: () => {
+          console.log(`Usuario con ID ${usuario._id} eliminado.`);
+          this.usersList = this.usersList.filter(u => u._id !== usuario._id); // Eliminamos el usuario de la lista local
+        },
+        error: (error) => {
+          console.error(`Error al eliminar el usuario con ID ${usuario._id}:`, error);
+        }
+      });
+    });
+
+}
 }

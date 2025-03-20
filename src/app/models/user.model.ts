@@ -6,7 +6,11 @@ export interface User {
   phone: string;
   available: boolean;
   packets: string[];
+  seleccionado?: boolean;
   }
 export class User implements User {
-    constructor() {}
+
+    constructor() {
+      this.seleccionado = false;
+    }
 }

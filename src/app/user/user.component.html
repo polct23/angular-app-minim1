@@ -1,10 +1,30 @@
-<div *ngIf="usersList.length > 0">
-  <div *ngFor="let user of usersList; let i = index; trackBy: trackByUserId">
-    <p>Username del usuario: {{ user.name }}</p>
-    <p>Teléfono del usuario: {{ user.phone }}</p>
-    <p>Email del usuario: {{ user.email }}</p>
-  </div>
-</div>
+
 <ng-template #noUsers>
   <div>No hay usuarios disponibles</div>
 </ng-template>
+<div class="usuario-lista">
+  <div *ngIf="usersList.length > 0">
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let usuario of usersList">
+          <td>
+            <input type="checkbox" [checked]="usuario.seleccionado" (change)="toggleSeleccion(usuario)" />
+          </td>
+          <td>
+            <p>Username del usuario: {{ usuario.name }}</p>
+            <p>Teléfono del usuario: {{ usuario.phone }}</p>
+            <p>Email del usuario: {{ usuario.email }}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  
+</div>
+
+<div>
+  <a class="button delete-button" (click)="confirmarEliminacion()">Eliminar Usuarios Seleccionados</a>
+</div>
+
+
