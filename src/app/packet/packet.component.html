@@ -1,10 +1,21 @@
-<div *ngIf="packetsList.length > 0">
-  <div *ngFor="let packet of packetsList; let i = index; trackBy: trackByPacketId">
-    <p>Nombre: {{ packet.name }}</p>
-    <p>Descripción: {{ packet.description }}</p>
-    <p>Estatus: {{ packet.status }}</p>
+<!-- Lista de paquetes paginados -->
+<div *ngIf="displayedPackets.length > 0; else noPackets">
+  <div *ngFor="let packet of displayedPackets; trackBy: trackByPacketId">
+    <p><strong>Nombre:</strong> {{ packet.name }}</p>
+    <p><strong>Descripción:</strong> {{ packet.description }}</p>
+    <p><strong>Estatus:</strong> {{ packet.status }}</p>
   </div>
 </div>
+
+<!-- Mensaje si no hay paquetes -->
 <ng-template #noPackets>
   <div>No hay paquetes disponibles</div>
 </ng-template>
+
+<!-- Paginador de Angular Material -->
+<mat-paginator 
+  [length]="totalItems"
+  [pageSize]="itemsPerPage"
+  [pageSizeOptions]="[3, 5, 10]"
+  (page)="onPageChange($event)">
+</mat-paginator>

@@ -3,10 +3,10 @@
   <div>No hay usuarios disponibles</div>
 </ng-template>
 <div class="usuario-lista">
-  <div *ngIf="usersList.length > 0">
+  <div *ngIf="usersList.length > 0; else noUsers">
     <table class="table">
       <tbody>
-        <tr *ngFor="let usuario of usersList" [ngClass]="{'bg-red': !usuario.available}" >
+        <tr *ngFor="let usuario of displayedUsers" [ngClass]="{'bg-red': !usuario.available}" >
           <td>
             <input type="checkbox" [checked]="usuario.seleccionado" (change)="toggleSeleccion(usuario)" />
           </td>
@@ -27,5 +27,16 @@
   <a class="button delete-button" (click)="confirmarEliminacion()">Eliminar Usuarios Seleccionados</a>
   <a class="button deactivate-button" (click)="desactivarUsuarios()">Desactivar Usuarios Seleccionados</a>
 </div>
+
+<ng-template #noUsers>
+  <div>No hay usuarios disponibles</div>
+</ng-template>
+
+<mat-paginator 
+  [length]="totalItems"
+  [pageSize]="itemsPerPage"
+  [pageSizeOptions]="[3, 5, 10]"
+  (page)="onPageChange($event)">
+</mat-paginator>
 
 

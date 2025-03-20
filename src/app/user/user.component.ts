@@ -3,10 +3,11 @@ import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatPaginatorModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
   standalone: true
@@ -17,7 +18,12 @@ export class UserComponent implements OnInit {
 
   }
   usuarioSeleccionado: User = new User();
-  usersList: User[];
+  usersList: User[] = [];
+  displayedUsers: User[] = [];
+  totalItems = 0;
+  itemsPerPage = 3;
+  currentPage = 0;
+
   constructor( private cdr: ChangeDetectorRef) {
     this.usersList = [];
   }
@@ -33,6 +39,8 @@ export class UserComponent implements OnInit {
           ...user,
           seleccionado: false // Inicializa la propiedad seleccionado
         }));
+        this.totalItems = this.usersList.length;
+        this.updateDisplayedUsers();
         console.log(this.usersList, this.usersList.length);
         this.cdr.detectChanges();
         if (this.usersList.length > 0) {
@@ -45,6 +53,18 @@ export class UserComponent implements OnInit {
       }
     });
   }
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.updateDisplayedUsers();
+  }
+
+  updateDisplayedUsers() {
+    const start = this.currentPage * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.displayedUsers = this.usersList.slice(start, end);
+  }
+
   trackByUserId(index: number, user: any): number {
     return user.id;
   }
