@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { map, Observable } from 'rxjs';
-
+import { tap } from 'rxjs/operators'; // Asegúrate de importar 'tap'
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +28,7 @@ export class UserService {
   }
 
 
-  createUser2(credentials: { name: string; email: string; password: string; phone: string; available: boolean; packets: string[] }): Observable<any> 
+  createUser2(credentials: { name: string; email: string; password: string; phone: string; available: boolean; packets: string[] }): Observable<any>
   {
     credentials.available = true;
     console.log("credentials:",credentials);
@@ -38,14 +38,19 @@ export class UserService {
   {
     return this.http.post(this.apiUrl, credentials);
   }
-  
+
   deleteUsuario(id: number): Observable<any> {
       return this.http.delete(`${this.apiUrl}/${id}`); // Llamada DELETE para eliminar un usuario
   }
-  deactivateUsuario(id: number, user:User): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, {user}); // Llamada PUT para desactivar un usuario
+
+
+  deactivateUsuario(id: number, user: User): Observable<any> {
+      user.available = false; // Cambia el estado a no disponible
+      return this.http.put(`${this.apiUrl}/${id}`, { available: false }).pipe(
+          tap(response => console.log('Server response:', response)) // Escribe la respuesta en la consola
+      );
   }
-  
-  
+
+
 
 }

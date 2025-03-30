@@ -70,6 +70,7 @@ export class UserComponent implements OnInit {
   }
   toggleSeleccion(usuario: User): void {
     usuario.seleccionado = !usuario.seleccionado;
+    console.log(usuario.seleccionado);
   }
   confirmarEliminacion(): void {
     const usuariosSeleccionados = this.usersList.filter(usuario => usuario.seleccionado); // Filtra los usuarios seleccionados
@@ -97,11 +98,12 @@ export class UserComponent implements OnInit {
         }
       });
     }
-    else if(opcion==2){
+    else if(opcion === 2){
+
       this.userService.deactivateUsuario(usuario._id, usuario).subscribe({
         next: () => {
           console.log(`Usuario con ID ${usuario._id} eliminado.`);
-         
+
         },
         error: (error) => {
           console.error(`Error al eliminar el usuario con ID ${usuario._id}:`, error);
@@ -111,7 +113,7 @@ export class UserComponent implements OnInit {
     }
 
     });
-    
+
 
 }
 desactivarUsuarios(): void {

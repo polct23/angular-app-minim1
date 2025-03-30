@@ -9,7 +9,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LeftBoxComponent, RegisterButtonComponent, RegisterFormComponent, HeaderComponent, MatPaginatorModule],
+  imports: [LeftBoxComponent, HeaderComponent, MatPaginatorModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

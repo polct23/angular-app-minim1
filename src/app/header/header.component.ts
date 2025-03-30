@@ -11,6 +11,9 @@ import { RegisterButtonComponent } from '../register-button/register-button.comp
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
+
+
+
 export class HeaderComponent implements OnInit {
   searchTerm: string = '';
   message: string = 'user';
@@ -26,3 +29,5 @@ export class HeaderComponent implements OnInit {
     }
   }
 }
+
+

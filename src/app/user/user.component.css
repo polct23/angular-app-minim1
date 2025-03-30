@@ -63,8 +63,9 @@ div > div:empty {
 }
 
 .button {
+  background-color: #557eed;
   box-shadow: inset 0 1px 0 0 #ffffff;
-  background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background: #557eed linear-gradient(to bottom, #557eed 5%, #3d50dc 100%);
   border-radius: 6px;
   border: 1px solid #dcdcdc;
   display: inline-block;
@@ -78,13 +79,14 @@ div > div:empty {
   text-shadow: 0 1px 0 #ffffff;
   outline: none;
   transition: all 0.3s ease;
-  margin-left: 0px;
+  margin-left: 250px;
 }
 
 .delete-button {
   background: #871111 linear-gradient(to bottom, #ff3300 5%, #6e1318 100%);
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 30px;
   color: white;
   text-shadow: 0 1px 0 #1e7e34;
 }
@@ -98,27 +100,67 @@ div > div:empty {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .deactivate-button {
-  background: #28a745 linear-gradient(to bottom, #28a745 5%, #218838 100%);
+  background: #1e7e34 linear-gradient(to bottom, #274cb1 5%, #1125bd 100%);
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 30px;
   color: white;
   text-shadow: 0 1px 0 #1e7e34;
 }
 
 .deactivate-button:hover {
-  background: #218838 linear-gradient(to bottom, #218838 5%, #1e7e34 100%);
+  background: #3253cb linear-gradient(to bottom, #122197 5%, #020a62 100%);
 }
 
 .deactivate-button:active {
   background: #1e7e34 linear-gradient(to bottom, #1e7e34 5%, #155724 100%);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-.bg-blue {
-  background-color: blue;
-  color: white; /* Opcional: para que el texto sea legible */
+/* Estilos para la tabla */
+.usuario-lista {
+  width: 100%;
 }
 
-.bg-red {
-  background-color: red;
-  color: white; /* Opcional: para que el texto sea legible */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Esto ayuda a que las celdas se expandan correctamente */
+}
+
+/* Estilo para las filas */
+.table tr {
+  width: 100%;
+  display: table; /* Fuerza a que la fila se comporte como tabla */
+}
+
+/* Estilo para las celdas */
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Celda del checkbox */
+.checkbox-cell {
+  width: 40px; /* Ancho fijo para el checkbox */
+}
+
+/* Celda de información del usuario */
+.user-info {
+  width: auto; /* Ocupa el resto del espacio */
+}
+
+/* Estilo para filas no disponibles */
+.bg-blue {
+  background-color: #1e88e5 !important;
+}
+
+.bg-blue td {
+  background-color: inherit !important;
+  color: white !important;
+}
+
+/* Asegura que el contenedor de la tabla ocupe todo el espacio */
+.usuario-lista > div {
+  width: 100%;
+  display: block;
 }

@@ -20,13 +20,36 @@ body {
   position: relative;
 }
 
-/* Logo en la parte superior izquierda */
+/* Agrega esto a tu header.component.css */
+
 .header-logo {
-  width: 80px; /* Ajusta según sea necesario */
-  height: auto;
-  position: absolute;
-  left: 20px;
-  top: 10px;
+  border-radius: 50%; /* Forma completamente redondeada */
+  width: 80px;       /* Tamaño ajustable */
+  height: 80px;
+  object-fit: cover;  /* Asegura que la imagen mantenga sus proporciones */
+  border: 3px solid #ffffff; /* Borde elegante */
+  box-shadow: 0 4px 8px rgb(255, 255, 255); /* Sombra suave */
+  transition: all 0.3s ease; /* Transición para efectos hover */
+  background-color: #f8f9fa; /* Color de fondo por si la imagen tiene transparencia */
+}
+
+/* Efecto al pasar el mouse */
+.header-logo:hover {
+  transform: scale(1.05); /* Ligero aumento de tamaño */
+  box-shadow: 0 6px 12px rgb(255, 253, 253);
+  border-color: #3498db; /* Cambio de color del borde */
+}
+
+/* Si prefieres esquinas ligeramente redondeadas en lugar de círculo perfecto */
+.header-logo.soft-rounded {
+  border-radius: 20px; /* Alternativa menos redondeada */
+}
+
+/* Estilo para contenedor si necesitas alineación */
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre logo y texto */
 }
 
 /* Título centrado */

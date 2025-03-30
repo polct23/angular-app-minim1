@@ -6,11 +6,11 @@
   <div *ngIf="usersList.length > 0; else noUsers">
     <table class="table">
       <tbody>
-        <tr *ngFor="let usuario of displayedUsers" [ngClass]="{'bg-red': !usuario.available}" >
-          <td>
+        <tr *ngFor="let usuario of displayedUsers" [class.bg-blue]="!usuario.available">
+          <td class="checkbox-cell">
             <input type="checkbox" [checked]="usuario.seleccionado" (change)="toggleSeleccion(usuario)" />
           </td>
-          <td >
+          <td class="user-info">
             <p>Username del usuario: {{ usuario.name }}</p>
             <p>Teléfono del usuario: {{ usuario.phone }}</p>
             <p>Email del usuario: {{ usuario.email }}</p>
@@ -18,9 +18,7 @@
         </tr>
       </tbody>
     </table>
-
   </div>
-  
 </div>
 
 <div>
@@ -32,7 +30,7 @@
   <div>No hay usuarios disponibles</div>
 </ng-template>
 
-<mat-paginator 
+<mat-paginator
   [length]="totalItems"
   [pageSize]="itemsPerPage"
   [pageSizeOptions]="[3, 5, 10]"
