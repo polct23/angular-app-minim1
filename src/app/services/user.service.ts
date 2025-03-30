@@ -50,6 +50,12 @@ export class UserService {
           tap(response => console.log('Server response:', response)) // Escribe la respuesta en la consola
       );
   }
+  getPaquetesUsuario(userId: string): Observable<any[]> {
+    console.log('ID del usuario:', userId); // Verifica que el ID no sea null o undefined
+    return this.http.get<any[]>(`${this.apiUrl}/${userId}/packets`).pipe(
+      tap(paquetes => console.log(`Paquetes del usuario ${userId}:`, paquetes))
+    );
+  }
 
 
 

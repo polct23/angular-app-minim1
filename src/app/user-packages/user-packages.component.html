@@ -1,0 +1,13 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+      <h2>Paquetes Asignados</h2>
+      <ul>
+        <li *ngFor="let packet of paquetes">
+          <strong>Nombre:</strong> {{ packet.name }}<br>
+          <strong>Descripción:</strong> {{ packet.description }}<br>
+          <strong>Estado:</strong> {{ packet.status }}
+        </li>
+      </ul>
+      <button class="close-button" (click)="cerrar()">Cerrar</button>
+    </div>
+  </div>
