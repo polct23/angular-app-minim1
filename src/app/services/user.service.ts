@@ -11,9 +11,9 @@ export class UserService {
 
   private apiUrl = "http://localhost:4000/api/users";
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<{ data: User[] }>(this.apiUrl).pipe(
-      map(response => response.data) // Extrae el array 'data'
+  getUsers(page: number = 1, limit: number = 3): Observable<{ data: User[]; totalUsers: number; currentPage: number }> {
+    return this.http.get<{ data: User[]; totalUsers: number; currentPage: number }>(
+      `${this.apiUrl}?page=${page}&limit=${limit}`
     );
   }
 

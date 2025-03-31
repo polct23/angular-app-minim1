@@ -11,9 +11,9 @@ export class PacketService {
 
   private apiUrl = "http://localhost:4000/api/packets";
 
-  getPackets(): Observable<Packet[]> {
-    return this.http.get<{ data: Packet[] }>(this.apiUrl).pipe(
-      map(response => response.data) // Extrae el array 'data'
+  getPackets(page: number = 1, limit: number = 3): Observable<{ data: Packet[]; totalPackets: number; currentPage: number }> {
+    return this.http.get<{ data: Packet[]; totalPackets: number; currentPage: number }>(
+      `${this.apiUrl}?page=${page}&limit=${limit}`
     );
   }
    // Crear paquete

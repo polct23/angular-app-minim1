@@ -36,25 +36,20 @@ export class UserComponent implements OnInit {
   userService = inject(UserService);
 
   // Función que se usa cuando se hace click a listar usuarios
-  async obtenerUsuarios() {
-    // Usa getUsers() del servicio UserService para hacer la petición GET a la API de todos los usuarios
-    this.userService.getUsers().subscribe({
-      next: (users: User[]) => {
-        // Se añaden los usuarios recibidos por la petición getUsers() a la lista de usuarios
-        this.usersList = users.map(user => ({
+  obtenerUsuarios(): void {
+    this.userService.getUsers(this.currentPage + 1, this.itemsPerPage).subscribe({
+      next: (response) => {
+        this.usersList = response.data.map(user => ({
           ...user,
-          seleccionado: false // Inicializa la propiedad seleccionado
+          seleccionado: false // Inicializa la propiedad seleccionado en false
         }));
-        this.totalItems = this.usersList.length;
-        this.updateDisplayedUsers();
-        console.log(this.usersList, this.usersList.length);
-        this.cdr.detectChanges();
-        if (this.usersList.length > 0) {
-          console.log(this.usersList[0].name); // Ahora no dará error
-        }
+        this.displayedUsers = this.usersList;
+        this.totalItems = response.totalUsers;
+        console.log(this.usersList, this.totalItems);
+        this.cdr.detectChanges(); // Detecta cambios para actualizar la vista
       },
       error: (error) => {
-        console.error('Error al obtener usuarios:', error);
+        console.error('Error al obtener los usuarios:', error);
       }
     });
   }
@@ -62,17 +57,11 @@ export class UserComponent implements OnInit {
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.itemsPerPage = event.pageSize;
-    this.updateDisplayedUsers();
+    this.obtenerUsuarios();
   }
 
-  updateDisplayedUsers() {
-    const start = this.currentPage * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.displayedUsers = this.usersList.slice(start, end);
-  }
-
-  trackByUserId(index: number, user: any): number {
-    return user.id;
+  trackByUserId(index: number, user: any): string {
+    return user?._id || index.toString(); // Asegura que siempre se devuelva un valor válido
   }
 
   toggleSeleccion(usuario: User): void {

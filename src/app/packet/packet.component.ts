@@ -23,24 +23,22 @@ export class PacketComponent implements OnInit{
   }
   packetService = inject(PacketService);
 
-  async obtainPackets() {
-
-    //Usa getUsers() del servicio UserService para hacer la peticion get a la API de todos los usuarios
-    this.packetService.getPackets().subscribe({
-      next: (packets: Packet[]) => {
-        //se añaden los usuarios recibidos por la peticion getUsers() a la lista de usuarios
-        this.packetsList = packets;
-        this.totalItems = packets.length; // Actualiza el total de usuarios
-        this.updateDisplayedPackets(); // Filtra los usuarios a mostrar
-        console.log(this.packetsList, this.packetsList.length);
+  obtainPackets(): void {
+    this.packetService.getPackets(this.currentPage + 1, this.itemsPerPage).subscribe({
+      next: (response) => {
+        this.packetsList = response.data.map(packet => ({
+          ...packet
+        }));
+        this.displayedPackets = this.packetsList; // Actualiza los paquetes mostrados
+        this.totalItems = response.totalPackets;
+        console.log(this.packetsList, this.totalItems);
         this.cdr.detectChanges();
         if (this.packetsList.length > 0) {
           console.log(this.packetsList[0].name); // Ahora no dará error
         }
-
       },
       error: (error) => {
-        console.error('Error al obtener usuarios:', error);
+        console.error('Error al obtener paquetes:', error);
       }
     });
   }
@@ -48,16 +46,10 @@ export class PacketComponent implements OnInit{
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.itemsPerPage = event.pageSize;
-    this.updateDisplayedPackets();
+    this.obtainPackets(); // Llama a la función para obtener los paquetes de la nueva página
   }
 
-  updateDisplayedPackets() {
-    const start = this.currentPage * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.displayedPackets = this.packetsList.slice(start, end);
-  }
-
-  trackByPacketId(index: number, packet: any): number {
-    return packet.id;
+  trackByPacketId(index: number, packet: any): string {
+    return packet?._id || index.toString(); // Asegura que siempre se devuelva un valor válido
   }
 }
