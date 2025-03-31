@@ -3,7 +3,10 @@ export interface Packet {
   name: string;
   description: string;
   status: string;
+  seleccionado?: boolean;
 }
 export class Packet implements Packet {
-  constructor() {}
+  constructor() {
+    this.seleccionado = false;
+  }
 }

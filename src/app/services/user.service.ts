@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { map, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'; // Asegúrate de importar 'tap'
+import { map, Observable, throwError } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators'; // Asegúrate de importar 'tap'
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +56,12 @@ export class UserService {
       tap(paquetes => console.log(`Paquetes del usuario ${userId}:`, paquetes))
     );
   }
-
-
+  getUserByName(userName: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/name/${userName}`);
+  }
+  assignPacketsToUser(userName: string, packetId: string): Observable<any> {
+    console.log(`${this.apiUrl}/${userName}/packets`);
+    return this.http.post<any>(`${this.apiUrl}/${userName}/packets`, { packetId });
+  }
 
 }
