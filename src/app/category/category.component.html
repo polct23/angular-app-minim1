@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>Gestión de Categorías</h2>
+  
+    <!-- Botón para crear una nueva categoría -->
+    <button class="btn btn-primary" (click)="createCategory()">Crear Categoría</button>
+  
+    <!-- Tabla para listar categorías -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Seleccionar</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Activo</th>
+          <th>Prioridad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>
+            <input type="checkbox" [(ngModel)]="category.selected" />
+          </td>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td>{{ category.isActive ? 'Sí' : 'No' }}</td>
+          <td>{{ category.priority }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button class="btn btn-secondary" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+        Anterior
+      </button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button class="btn btn-secondary" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+        Siguiente
+      </button>
+    </div>
+  
+    <button class="btn btn-danger" (click)="deleteSelectedCategories()">Eliminar Seleccionadas</button>
+  </div>

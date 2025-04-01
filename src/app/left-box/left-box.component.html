@@ -1,4 +1,4 @@
-<div class = "container">
+<div class="container">
   <aside class="sidebar">
     <nav>
       <li>
@@ -19,12 +19,17 @@
           Users
         </a>
       </li>
-
+      <li>
+        <a class="button"
+          routerLink="/category-component"
+          routerLinkActive="activebutton"
+          ariaCurrentWhenActive="page">
+          Categories
+        </a>
+      </li>
     </nav>
   </aside>
   <main class="content">
     <router-outlet></router-outlet>
   </main>
-
-
 </div>
